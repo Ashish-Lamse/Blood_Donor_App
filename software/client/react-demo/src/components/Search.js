@@ -6,13 +6,10 @@ import {BootstrapTable, TableHeaderColumn} from "react-bootstrap-table";
 import {Jumbotron,PageHeader ,Well} from "react-bootstrap";
 import {
     BOOLEAN_POPUPS,
-    COMMENT_BOOLEAN_CHECK,
     POPUP_CHECK_BOOLEANVALUE,
     RECENT_DONAR,
     SEARCH_DATAA,
-    TEMP_UID,
-    UPDATE_DONAR_REGISTERED_DATA,
-    UPDATE_CITY_BLOOD_GROUP
+    UPDATE_DONAR_REGISTERED_DATA
 } from "../actions/actions";
 import moment from "moment";
 import {SimpleSelect} from 'react-selectize';
@@ -97,12 +94,6 @@ class Search extends Component {
         this.SEARCH_DATA_WITHOUT_RECENTDONARS()
     }
 
-    onCloseCommentClick(){
-        let { dispatch } =this.props;
-        let bool = false;
-        dispatch(COMMENT_BOOLEAN_CHECK(bool));
-        this.SEARCH_DATA_WITHOUT_RECENTDONARS();
-    }
 
     onChangeCallMethod(){
         let tempTotalRegisterdDonars = this.props.TotalRegisterdDonars;
@@ -340,7 +331,6 @@ function selectProps (state) {
         PersonalSearchData: state.allReducers.boolean_popups,
         PostRequestBoolean: state.allReducers.popup_check_booleanValue,
         GetThePostRequestedDate: state.allReducers.user_request_data,
-        commentbooleanvalue: state.allReducers.comment_boolean_check,
         totalComments :state.allReducers.total_comments,
         recentDonarStatus: state.allReducers.recent_donar_status
     }

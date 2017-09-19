@@ -5,7 +5,11 @@ import { connect } from 'react-redux'
 import autobind from 'autobind-decorator'
 import {Nav, Navbar, NavItem,Button, NavDropdown, MenuItem, Grid, Row, Col} from 'react-bootstrap'
 import { POPUP_CHECK_BOOLEANVALUE } from '../actions/actions'
-import {NEW_DONAR_REGISTERED_DATA,USER_REQUEST_DATA,SEARCH_DATA, COMMENT_BOOLEAN_CHECK, RECENT_DONAR,POST_REQUEST_BOOLEAN } from '../actions/actions'
+import {
+    NEW_DONAR_REGISTERED_DATA,
+    SEARCH_DATA,
+    RECENT_DONAR,
+    NEW_REQUEST } from '../actions/actions'
 
 import moment from 'moment'
 
@@ -29,8 +33,8 @@ class Header extends Component {
             'bloodGroup':'A+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         }
         let donar2=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -46,8 +50,8 @@ class Header extends Component {
             'bloodGroup':'AB+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         }
         let donar3=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -63,8 +67,8 @@ class Header extends Component {
             'bloodGroup':'B+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         }
         let donar4=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -80,8 +84,8 @@ class Header extends Component {
             'bloodGroup':'O+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         }
         let donar5=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -97,8 +101,8 @@ class Header extends Component {
             'bloodGroup':'AB-',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         }
         let donar6=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -114,8 +118,8 @@ class Header extends Component {
             'bloodGroup':'AB+',
             'city':'Puna',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         };
         let donar7=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -131,8 +135,8 @@ class Header extends Component {
             'bloodGroup':'AB-',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': undefined,
-            'end_date': undefined
+            'current_date': [],
+            'end_date': []
         };
 
         let { dispatch } =this.props;
@@ -148,16 +152,82 @@ class Header extends Component {
         dispatch(SEARCH_DATA(donar5));
         dispatch(NEW_DONAR_REGISTERED_DATA(donar6));
         dispatch(SEARCH_DATA(donar6));
-    }
-    render() {
 
+
+        let post1={
+            'firstName':'Sumit',
+            'lastName': 'Raman',
+            'email':'Sumit@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'AB-',
+            'city':'Hyderabad',
+            'comments':[]
+        };let post2={
+            'firstName':'Amit',
+            'lastName': 'Raman',
+            'email':'Amitt@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'A-',
+            'city':'Hyderabad',
+            'comments':[]
+        };let post3={
+            'firstName':'Siresh',
+            'lastName': 'Raman',
+            'email':'Suresh@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'AB+',
+            'city':'Hyderabad',
+            'comments':[]
+        };let post4={
+            'firstName':'Naresh',
+            'lastName': 'Raman',
+            'email':'Naresh@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'O-',
+            'city':'Hyderabad',
+            'comments':[]
+        };let post5={
+            'firstName':'Ramesh',
+            'lastName': 'Raman',
+            'email':'Ramesh@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'O+',
+            'city':'Hyderabad',
+            'comments':[]
+        };let post6={
+            'firstName':'Ganesh',
+            'lastName': 'Raman',
+            'email':'Ganesh@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'AB+',
+            'city':'Hyderabad',
+            'comments':[]
+        };let post7={
+            'firstName':'Praveen',
+            'lastName': 'Raman',
+            'email':'Praveen@gmail.com',
+            'phone':'1111111111',
+            'bloodGroup':'AB-',
+            'city':'Hyderabad',
+            'comments':[]
+        };
+
+        dispatch(NEW_REQUEST(post1));
+        dispatch(NEW_REQUEST(post2));
+        dispatch(NEW_REQUEST(post3));
+        dispatch(NEW_REQUEST(post4));
+        dispatch(NEW_REQUEST(post5));
+        dispatch(NEW_REQUEST(post6));
+        dispatch(NEW_REQUEST(post7));
+    }
+
+
+    render() {
         let { dispatch } =this.props;
         let boolval = false;
         let temp = false;
         dispatch(POPUP_CHECK_BOOLEANVALUE(boolval));
-        dispatch(COMMENT_BOOLEAN_CHECK(boolval));
         dispatch(RECENT_DONAR(temp));
-        dispatch(POST_REQUEST_BOOLEAN(temp));
 
         return (
             <div >
@@ -169,7 +239,11 @@ class Header extends Component {
                             </LinkContainer>
 
                             <LinkContainer to='/registerDonor'>
-                                <NavItem eventKey={2} href="#">registerDonor</NavItem>
+                                <NavItem eventKey={2} href="#">Register Donor</NavItem>
+                            </LinkContainer>
+
+                            <LinkContainer to='/postRequest'>
+                                <NavItem eventKey={3} href="#">Post Request</NavItem>
                             </LinkContainer>
                         </Nav>
                     </Navbar.Collapse>
@@ -194,7 +268,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps={
-    dispatch :  () => {}
+    dispatch :  () => []
 };
 
 function selectProps (state) {

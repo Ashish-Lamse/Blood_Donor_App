@@ -1,5 +1,5 @@
 /**
- * Created by semanticbits on 19/7/17.
+ * Created by SB0103 on 19/7/17.
  */
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form';
@@ -45,11 +45,6 @@ class RegistrationForm extends Component {
             pristine
             } = this.props;
 
-        console.log("Updating each time??");
-
-        localStorage.setItem('allProjectDetails',JSON.stringify(this.props.values));
-
-        console.log(JSON.parse(localStorage.getItem('allProjectDetails')));
         let d = JSON.parse(localStorage.getItem('allProjectDetails'));
 
         return (
@@ -159,7 +154,7 @@ function getInitFields() {
 
 export default reduxForm({
     form: 'RegistrationForm',
-    fields
+    fields: fields,
 })(RegistrationForm)
 
 
