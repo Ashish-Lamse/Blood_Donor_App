@@ -33,6 +33,22 @@ const request_poster_data =handleActions({
     }
 },[]);
 
+const all_comments =handleActions({
+    ADD_COMMENT: (state = [], action) => {
+        let all_comments = null;
+        all_comments = [...state, addDonor(action)];
+        return all_comments;
+    }
+},[]);
+
+
+const login_user=handleActions({
+    CURRENT_LOGGEDIN_USER:(state = {}, action)=>{
+        let login_user = null;
+        login_user = action.payload;
+        return login_user;
+    }
+},{});
 
 const  search_data=handleActions({
     SEARCH_DATA: (state = [], action) => {
@@ -63,10 +79,14 @@ const boolean_popups =handleActions({
 const user_request_data =handleActions({
     USER_REQUEST_DATA: (state = [], action) => {
         let user_request_data= null;
-        user_request_data = [...state, addDonor(action)]
+        user_request_data = [...state, addDonor(action)];
         return user_request_data;
     },
-
+    ADD_COMMENT:(state = [], action)=>{
+        let user_request_data= null;
+        user_request_data =  action.payload;
+        return user_request_data;
+    }
 },[]);
 
 const popup_check_booleanValue =handleActions({
@@ -94,6 +114,8 @@ const allReducers=combineReducers({
     popup_check_booleanValue:popup_check_booleanValue,
     recent_donar_status:recent_donar_status,
     request_poster_data:request_poster_data,
+    all_comments,
+    login_user,
     form : formReducer
 });
 

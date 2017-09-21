@@ -9,4 +9,5 @@ export const UPDATE_DONAR_REGISTERED_DATA = createAction('UPDATE_DONAR_REGISTERE
 
 /*For Post Request*/
 export const NEW_REQUEST = createAction('NEW_REQUEST') ;
+export const CURRENT_LOGGEDIN_USER = createAction('CURRENT_LOGGEDIN_USER') ;
 

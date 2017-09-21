@@ -17,7 +17,7 @@ import {SimpleSelect} from 'react-selectize';
 export const fields=[ 'bloodGroup', 'city'];
 var total_Donars_data;
 var boolean_Status = {show : false};
-
+var current_logged_in;
 @autobind
 class Search extends Component {
     SEARCH_DATA(){
@@ -149,6 +149,11 @@ class Search extends Component {
     }
 
     render() {
+        const   style={
+            marginTop: 79
+        };
+
+
         let {
             fields: { bloodGroup, city},
             SearchData,
@@ -239,7 +244,7 @@ class Search extends Component {
         };
 
         return (
-            <div >
+            <div style={style}>
                 <Form  >
                     <Well bsSize="large" bsStyle="primary">
                         <FormGroup >
@@ -324,6 +329,7 @@ Search.propTypes = {
 
 function selectProps (state) {
     total_Donars_data= state.allReducers.donars_data;
+    current_logged_in=state.allReducers.login_user;
     return {
         boolean_result: boolean_Status,
         SearchData: state.allReducers.search_data,

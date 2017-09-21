@@ -8,12 +8,14 @@ import Header from '../components/header';
 import Search from '../components/Search';
 import Register from '../components/registrarionDonar';
 import PostRequest from '../components/postRequest';
+import Login from '../components/login';
 
 
 const routes = (
     <Route>
         <Route path="/" component={ Header }>
-            <IndexRoute component={ Search } ></IndexRoute>
+            <IndexRoute component={ Login } ></IndexRoute>
+            <Route path ="login" component={Login}></Route>
             <Route path ="search" component={Search}></Route>
             <Route path ="registerDonor" component={Register}></Route>
             <Route path ="postRequest" component={PostRequest}></Route>

@@ -33,8 +33,8 @@ class Header extends Component {
             'bloodGroup':'A+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         }
         let donar2=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -50,8 +50,8 @@ class Header extends Component {
             'bloodGroup':'AB+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         }
         let donar3=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -67,8 +67,8 @@ class Header extends Component {
             'bloodGroup':'B+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         }
         let donar4=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -84,8 +84,8 @@ class Header extends Component {
             'bloodGroup':'O+',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         }
         let donar5=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -101,8 +101,8 @@ class Header extends Component {
             'bloodGroup':'AB-',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         }
         let donar6=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -118,8 +118,8 @@ class Header extends Component {
             'bloodGroup':'AB+',
             'city':'Puna',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         };
         let donar7=  {
             'Id':"2017-08-03T16:49:45+05:30",
@@ -135,8 +135,8 @@ class Header extends Component {
             'bloodGroup':'AB-',
             'city':'Hyderabad',
             'recent_donar':'NO',
-            'current_date': [],
-            'end_date': []
+            'current_date': null,
+            'end_date': null
         };
 
         let { dispatch } =this.props;
@@ -155,6 +155,7 @@ class Header extends Component {
 
 
         let post1={
+            "id":new Date()+1,
             'firstName':'Sumit',
             'lastName': 'Raman',
             'email':'Sumit@gmail.com',
@@ -163,6 +164,7 @@ class Header extends Component {
             'city':'Hyderabad',
             'comments':[]
         };let post2={
+            "id":new Date()+2,
             'firstName':'Amit',
             'lastName': 'Raman',
             'email':'Amitt@gmail.com',
@@ -171,6 +173,7 @@ class Header extends Component {
             'city':'Hyderabad',
             'comments':[]
         };let post3={
+            "id":new Date()+3,
             'firstName':'Siresh',
             'lastName': 'Raman',
             'email':'Suresh@gmail.com',
@@ -179,6 +182,7 @@ class Header extends Component {
             'city':'Hyderabad',
             'comments':[]
         };let post4={
+            "id":new Date()+4,
             'firstName':'Naresh',
             'lastName': 'Raman',
             'email':'Naresh@gmail.com',
@@ -187,6 +191,7 @@ class Header extends Component {
             'city':'Hyderabad',
             'comments':[]
         };let post5={
+            "id":new Date()+5,
             'firstName':'Ramesh',
             'lastName': 'Raman',
             'email':'Ramesh@gmail.com',
@@ -195,6 +200,7 @@ class Header extends Component {
             'city':'Hyderabad',
             'comments':[]
         };let post6={
+            "id":new Date()+6,
             'firstName':'Ganesh',
             'lastName': 'Raman',
             'email':'Ganesh@gmail.com',
@@ -203,6 +209,7 @@ class Header extends Component {
             'city':'Hyderabad',
             'comments':[]
         };let post7={
+            "id":new Date()+7,
             'firstName':'Praveen',
             'lastName': 'Raman',
             'email':'Praveen@gmail.com',
@@ -223,6 +230,25 @@ class Header extends Component {
 
 
     render() {
+        var currentPath = window.location.pathname;
+        console.log("------current path--------");
+        console.log(currentPath);
+
+        const style = {
+            margin: 0,
+            top: 60,
+            right: 100,
+            bottom:50,
+            left: 'auto',
+            position: 'fixed'
+        };
+
+        const navPos={
+            position: 'fixed',
+            zIndex:1,
+            marginBottom:50
+        };
+
         let { dispatch } =this.props;
         let boolval = false;
         let temp = false;
@@ -231,20 +257,40 @@ class Header extends Component {
 
         return (
             <div >
-                <Navbar inverse collapseOnSelect>
+                <Navbar inverse collapseOnSelect style={navPos}>
                     <Navbar.Collapse>
                         <Nav>
-                            <LinkContainer to='/search'>
+                            <LinkContainer to='/login'>
+                                <NavItem eventKey={2} href="#">Login</NavItem>
+                            </LinkContainer>
+
+                            {!currentPath.includes('login')
+                                ? <LinkContainer to='/search'>
                                 <NavItem eventKey={1} href="#">Search</NavItem>
                             </LinkContainer>
+                                : null }
 
-                            <LinkContainer to='/registerDonor'>
-                                <NavItem eventKey={2} href="#">Register Donor</NavItem>
-                            </LinkContainer>
-
-                            <LinkContainer to='/postRequest'>
+                            {!currentPath.includes('login')
+                                ? <LinkContainer to='/postRequest'>
                                 <NavItem eventKey={3} href="#">Post Request</NavItem>
                             </LinkContainer>
+                                : null }
+
+                            {!currentPath.includes('login')
+                                ? <LinkContainer to='/registerDonor'>
+                                <NavItem eventKey={2} href="#">Register Donor</NavItem>
+                            </LinkContainer>
+                                : null }
+
+                            {!currentPath.includes('login')
+                                ?   <LinkContainer to='/login'>
+                                <NavItem style={style} eventKey={3} href="#">
+                                    <img width={20} height={20}  src="../../src/assets/logout.png"/>
+                                </NavItem>
+                            </LinkContainer>
+                                : null }
+
+
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
@@ -268,7 +314,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps={
-    dispatch :  () => []
+    dispatch :  () => null
 };
 
 function selectProps (state) {

@@ -15,29 +15,34 @@ import PostComponent from './PostComponent';
 export const fields=[ 'firstName', 'lastName','email','phone','bloodGroup','city'];
 
 var request_poster_data;
-
+var count=0;
 
 @autobind
 class PostRequest extends Component {
+
     NEW_REQUEST_POSTER(){
-        console.log("New request poster");
+        count=request_poster_data.length;
         let { dispatch } =this.props;
+
+        this.props.values.id=new Date()+count++;
+        this.props.values.comments=[];
 
         localStorage.setItem('allRequestPoster',JSON.stringify(this.props.values));
         let d = JSON.parse(localStorage.getItem('allRequestPoster'));
-
         dispatch(NEW_REQUEST(this.props.values));
     }
 
     render() {
+        const   style={
+            marginTop: 79
+        };
         const { fields: { firstName, lastName,email, phone,bloodGroup,city,totalPosts},
             submitting,
             pristine
             } = this.props;
-
         return (
             <div>
-                <Panel header="Post Request" bsStyle="default">
+                <Panel header="Post Request" style={style} bsStyle="default">
                     <Form horizontal >
                         <FormGroup >
                             <Col componentClass={ControlLabel} sm={2}>First Name</Col>

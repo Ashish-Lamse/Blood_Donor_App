@@ -2,16 +2,42 @@
  * Created by sb0103 on 19/9/17.
  */
 import React, { Component, PropTypes } from 'react'
-import {PanelGroup,Panel,Col,Form,FormGroup,FormControl,ControlLabel,Button} from 'react-bootstrap'
+import {PanelGroup,Panel,Col,Form,FormGroup,FormControl,ControlLabel,Button,Row,Well} from 'react-bootstrap'
 import CommentsComponent from './CommentComponent';
+import {reduxForm} from "redux-form";
+import { UPDATE_POST_REQUEST } from '../actions/actions'
+import {reset} from 'redux-form';
 
+export const fields=[ 'comment'];
+var current_logged_in;
+var allPosts;
 
 class PostComponent extends Component {
     ADD_COMMENT(){
-        console.log("Add comment here");
+        console.log("____current_logged_in___");
+        console.log(current_logged_in);
+
+        this.props.data.comments.push({user:current_logged_in.username,comment:this.props.values.comment});
+        this.props.values.comment={};
+        this.props.resetForm();  // requires form name
     }
 
     render() {
+
+        var allComments = this.props.data.comments.map(function(comment){
+            return (
+                <div>
+                    <Row className="show-grid">
+                        <Col sm={1} ><img width={30} height={30}  src="../../src/assets/person.png"/>{comment.user}</Col>
+                        <Col sm={10} md={11}><Well bsSize="small" bsStyle="primary">{comment.comment}</Well></Col>
+                    </Row>
+                </div>
+            );
+        });
+
+        const { fields: { comment, totalPosts}} = this.props;
+
+
         return (
             <PanelGroup defaultActiveKey="1" accordion>
                 <Panel header={this.props.data.firstName}>
@@ -39,11 +65,8 @@ class PostComponent extends Component {
                             <Col componentClass={ControlLabel} sm={2}>comments..</Col>
 
                             <Col sm={2}>
-                                <FormControl type="text" placeholder="Add comment"/>
-
-                                {this.props.data.comments.map((comment, i) => <CommentsComponent
-                                    key = {i} commentData = {comment}/>)}
-
+                                {allComments}
+                                <FormControl type="text" placeholder="Add Comment" {...comment}/>
                             </Col>
                         </FormGroup>
 
@@ -57,5 +80,19 @@ class PostComponent extends Component {
     }
 }
 
-export default PostComponent;
+function selectProps (state) {
+    allPosts=state.allReducers.request_poster_data;
+    current_logged_in=state.allReducers.login_user;
+    return {
+        totalPosts:state.allReducers.request_poster_data
+    }
+}
+
+export default reduxForm({
+        form : 'PostComponent',
+        fields
+    },
+    selectProps
+)(PostComponent)
+
 
